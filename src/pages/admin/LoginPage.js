@@ -4,17 +4,19 @@ import RequestForm from './RequestForm';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
+import config from '../../constants/Config';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [flag, setFlag] = useState('');
-    //let flag = false;
+    
     const handleSubmit = (e) => {
+        const { userName, pass } = config;
         e.preventDefault();
         // Handle login logic (authentication, API call, etc.) here
         console.log('Login submitted with:', { username, password });
-        if(username === "Suyash" && password === "Sample"){
+        if(username === userName && password === pass){
             toast.success('Login successful!', {
                 position: 'top-right',
                 autoClose: 3000,
@@ -23,7 +25,6 @@ const LoginPage = () => {
                 pauseOnHover: true,
                 draggable: true,
             });
-            
             setFlag(true);
         }
         else{
@@ -36,11 +37,11 @@ const LoginPage = () => {
                 draggable: true,
             });
         }
-      };
+    };
 
   return (
     <>
-    {flag == true ? 
+    {flag === true ? 
         <RequestForm /> : 
         <div className="login-container">
         <h2>Admin Login</h2>
