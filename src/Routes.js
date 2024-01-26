@@ -2,7 +2,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import TweetList from './pages/tweets/TweetList';
-import App from './App';
 import LoginPage from './pages/admin/LoginPage';
 
 const Routes = () => {

@@ -7,15 +7,15 @@ const RequestForm = () => {
   return (
     <>
         <h1>Admin Portal</h1>
-        <table>
+        <table border="1">
             <thead>
                 <th>
-
+                    Username
                 </th>
             </thead>
             <tr>
                 <td>
-
+                    @Sample
                 </td>
             </tr>
         </table>
