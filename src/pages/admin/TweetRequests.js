@@ -20,14 +20,23 @@ const TweetRequests = () => {
     history.push('/tweets');
   };
 
+  const postTweets = () => {
+    // Change the route when the button is clicked
+    history.push('/addtweets');
+  }
+
+  const onAccept = () => {
+    //Perform this action on accepting the request
+  }
+
+  const onReject = () => {
+    ///Perform this action on rejecting the request
+  }
+
   return (
     <>
-      <Button variant="primary" className="float-end" onClick={showTweets}>
-        Show Tweets
-      </Button>
-      <Button variant="primary" className="float-end">
-        Add Tweets
-      </Button>
+      <Button variant="primary" className="float-end m-3" onClick={showTweets}>Show Tweets</Button>
+      <Button variant="primary" className="float-end m-3" onClick={postTweets}>Add Tweets</Button>
       <div className="container mt-5">
         <table className="table table-bordered table-hover">
           <thead>
@@ -45,13 +54,9 @@ const TweetRequests = () => {
                 <td>{item.name}</td>
                 <td>{item.age}</td>
                 <td>
-                  <button type="button" className="btn btn-success">
-                    Accept
-                  </button>
-                  &nbsp;&nbsp;&nbsp;
-                  <button type="button" className="btn btn-danger">
-                    Reject
-                  </button></td>
+                  <button type="button" className="btn btn-success m-2" onClick={onAccept}>Accept</button>
+                  <button type="button" className="btn btn-danger m-2" onClick={onReject}>Reject</button>
+                </td>
               </tr>
             ))}
           </tbody>

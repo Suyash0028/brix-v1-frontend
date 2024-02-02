@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TweetComponent from '../../components/TweetComponent';
+import userImg from "../../assests/images/user.png"
 
 const TweetList = () => {
   const [tweets, setTweets] = useState([]);
@@ -10,18 +11,17 @@ const TweetList = () => {
   useEffect(() => {
     const fetchData = async () => {
       // Replace with your actual API call
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/tweets/get-all-tweets`);
       const data = await response.json();
       const formattedTweets = data.map((post) => ({
-        id: post.id,
-        author: post.title,
-        content: post.body,
-        // For illustration purposes, add a random image to some tweets
-        image: post.id % 2 === 0 ? `https://picsum.photos/400/200?random=${post.id}` : null,
+        id: post._id,
+        author: post.userName,
+        content: post.tweetContent,
+        image: post.tweetImage ? `data:image/png;base64,${post.tweetImage}` : null,
+        profileImg: post.imageUrl ? `data:image/png;base64,${post.imageUrl}` : userImg,
       }));
       setTweets(formattedTweets);
     };
-
     fetchData();
   }, []); // Run only once on component mount
 

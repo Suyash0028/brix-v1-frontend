@@ -44,7 +44,7 @@ const LoginPage = () => {
         e.preventDefault();
         // Handle login logic (authentication, API call, etc.) here
 
-        if (username === userName && password === pass) {
+        if (username.trim() === userName && password.trim() === pass) {
             toast.success(ToastMessages.Login_Success, {
                 position: 'top-right',
                 autoClose: 3000,
