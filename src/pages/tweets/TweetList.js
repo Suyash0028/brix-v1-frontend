@@ -15,10 +15,10 @@ const TweetList = () => {
       const data = await response.json();
       const formattedTweets = data.map((post) => ({
         id: post._id,
-        author: post.userName,
+        author: post.userId?.userName,
         content: post.tweetContent,
-        image: post.tweetImage ? `data:image/png;base64,${post.tweetImage}` : null,
-        profileImg: post.imageUrl ? `data:image/png;base64,${post.imageUrl}` : userImg,
+        image: post.tweetImage ? post.tweetImage : null,
+        profileImg: post.imageUrl ? post.userId?.imageUrl : userImg,
       }));
       setTweets(formattedTweets);
     };
