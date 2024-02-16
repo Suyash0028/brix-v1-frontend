@@ -15,6 +15,7 @@ const AddTweets = () => {
     });
 
     const handlePostRequest = () => {
+        console.log(postData);
         fetch(`${process.env.REACT_APP_BASE_URL}/tweets/add-new-tweet`, {
             method: "POST",
             headers: {
@@ -23,6 +24,7 @@ const AddTweets = () => {
             body: JSON.stringify(postData),
 
         }).then((response) => {
+            console.log(response);
             if (response.ok) {
                 //Redirect to tweets list
                 history.push("/tweets");
@@ -136,7 +138,7 @@ const AddTweets = () => {
                                 <img
                                     src={base64Image}
                                     alt="Converted to Base64"
-                                    width={250}
+                                    width={500}
                                     height={300}
                                 />
                             )}
