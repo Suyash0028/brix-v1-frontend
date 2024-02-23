@@ -1,8 +1,8 @@
 // TweetList.js
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import TweetComponent from '../../components/TweetComponent';
-import userImg from "../../assests/images/user.png"
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import TweetComponent from "../../components/TweetComponent";
+import userImg from "../../assests/images/user.png";
 
 const TweetList = () => {
   const [tweets, setTweets] = useState([]);
@@ -11,8 +11,11 @@ const TweetList = () => {
   useEffect(() => {
     const fetchData = async () => {
       // Replace with your actual API call
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/tweets/get-all-tweets`);
-      const data = await response.json();
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/tweets/get-all-tweets`
+      );
+      const { data } = await response.json();
+      console.log(data);
       const formattedTweets = data.map((post) => ({
         id: post._id,
         author: post.userId?.userName,

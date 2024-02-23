@@ -1,17 +1,20 @@
 // src/pages/Home.js
-import React, { useState, useEffect } from 'react';
-import RequestForm from './TweetRequests';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../../styles/Login.css';
-import config from '../../constants/Config';
-import { storeDataWithTimestamp } from '../../utilities/LocalStorageUtils';
-import { retrieveDataWithTimestamp } from '../../utilities/LocalStorageUtils';
-import LOCAL_STORAGE_KEYS from '../../utilities/LocalStorageKeys';
-import ToastMessages from '../../constants/ToastMessages';
-import UserNavbarComponent from '../../components/NavbarComponent';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import RequestForm from "./TweetRequests";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../styles/Login.css";
+import config from "../../constants/Config";
+import { storeDataWithTimestamp } from "../../utilities/LocalStorageUtils";
+import { retrieveDataWithTimestamp } from "../../utilities/LocalStorageUtils";
+import LOCAL_STORAGE_KEYS from "../../utilities/LocalStorageKeys";
+import ToastMessages from "../../constants/ToastMessages";
+import UserNavbarComponent from "../../components/NavbarComponent";
 
 const LoginPage = () => {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,8 +46,8 @@ const LoginPage = () => {
         login
       );
       const userToken = response.data.token;
-      localStorage.setItem("brix_common_v1_login", userToken);
-      console.log(localStorage);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.brix_common_v1_login, userToken);
+      history.push("/tweets");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Axios error:", error);
