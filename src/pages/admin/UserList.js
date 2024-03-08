@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 
-const TweetRequests = () => {
+const UserList = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const TweetRequests = () => {
         approvalStatus: user.isApproved,
       }));
       setData(formattedUsers);
-      console.log(data);
     };
     fetchUsers();
   }, []);
@@ -35,17 +34,19 @@ const TweetRequests = () => {
 
   const postTweets = () => {
     // Change the route when the button is clicked
-    history.push("/addtweets");
+    history.push("/admin/add-tweets");
+  };
+
+  const userDetails = () => {
+    // Change the route when the button is clicked
+    history.push("/admin/user-details");
   };
 
   return (
     <>
-      <Button variant="primary" className="float-end m-3" onClick={showTweets}>
-        Show Tweets
-      </Button>
-      <Button variant="primary" className="float-end m-3" onClick={postTweets}>
-        Add Tweets
-      </Button>
+      <Button variant="primary" className="float-end m-3" onClick={showTweets}>Show Tweets</Button>
+      <Button variant="primary" className="float-end m-3" onClick={postTweets}>Add Tweets</Button>
+      <Button variant="primary" className="float-end m-3" onClick={userDetails}>User Details</Button>
       <div className="container mt-5">
         <table className="table table-bordered table-hover">
           <thead>
@@ -74,4 +75,4 @@ const TweetRequests = () => {
   );
 };
 
-export default TweetRequests;
+export default UserList;

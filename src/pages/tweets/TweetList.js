@@ -15,7 +15,6 @@ const TweetList = () => {
         `${process.env.REACT_APP_BASE_URL}/tweets/get-all-tweets`
       );
       const { data } = await response.json();
-      console.log(data);
       const formattedTweets = data.map((post) => ({
         id: post._id,
         author: post.userId?.userName,

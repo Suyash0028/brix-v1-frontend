@@ -2,7 +2,7 @@
 import React from 'react';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 
-const UserNavbarComponent = ({ userName, onLogout }) => {
+const UserNavbarComponent = ({ onLogout }) => {
     return (
         <Navbar bg="dark" variant="dark" className="justify-content-between">
             <Navbar.Brand href="/" className='m-2'>Brix Admin Portal</Navbar.Brand>
@@ -20,8 +20,6 @@ const UserNavbarComponent = ({ userName, onLogout }) => {
                             minWidth: '10rem', // Adjust as needed
                         }}
                     >
-                        {/* <Dropdown.ItemText>Hello, {userName}</Dropdown.ItemText>
-                        <Dropdown.Divider /> */}
                         <Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>

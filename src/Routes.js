@@ -1,23 +1,39 @@
 // src/Routes.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import TweetList from './pages/tweets/TweetList';
-import LoginPage from './pages/admin/LoginPage';
-import AddTweets from './pages/tweets/AddTweets';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import TweetList from "./pages/tweets/TweetList";
+import LoginPage from "./pages/admin/LoginPage";
+import AddTweets from "./pages/tweets/AddTweets";
+import ProtectedRoutes from "./privateRoutes";
+import UserDetails from "./pages/admin/UserDetails";
+import UserList from "./pages/admin/UserList";
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route path={"/"} exact component={() => 
-            <Redirect to={"/admin"}/>
-        }/>
-        <Route path={"/admin"} exact component={() => 
-            <Redirect to={"/admin/login"}/>
-        }/>
-        <Route path={"/admin/login"} component={LoginPage}/>
+        <Route path={"/"} exact component={() => <Redirect to={"/admin"} />} />
+        <Route
+          path={"/admin"}
+          exact
+          component={() => <Redirect to={"/admin/login"} />}
+        />
+        <Route path={"/admin/login"} component={LoginPage} />
         <Route path="/tweets" component={TweetList} />
-        <Route path="/addtweets" component={AddTweets} />
+        <ProtectedRoutes path="/admin/add-tweets">
+          <AddTweets />
+        </ProtectedRoutes>
+        <ProtectedRoutes path="/admin/user-list">
+          <UserList />
+        </ProtectedRoutes>
+        <ProtectedRoutes path="/admin/user-details">
+          <UserDetails />
+        </ProtectedRoutes>
       </Switch>
     </Router>
   );
