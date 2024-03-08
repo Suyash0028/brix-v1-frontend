@@ -1,7 +1,6 @@
 // TweetComponent.js
 import React from 'react';
 import { Card, Figure } from 'react-bootstrap';
-import AspectRatioContainer from './AspectRatioContainer';
 
 const TweetComponent = ({ tweet }) => {
   return (
@@ -14,24 +13,22 @@ const TweetComponent = ({ tweet }) => {
             alt="Author"
             src={tweet.profileImg} // Placeholder image from Lorem Picsum
             roundedCircle
-            style={{ border: '2px solid #000', marginRight: '0.75em'}}
+            style={{ border: '2px solid #000', marginRight: '0.75em' }}
           />
         </Figure>
         <div className="d-flex flex-column align-items-start">
           <Card.Title as="h5">{tweet.author}</Card.Title>
           <Card.Text>{tweet.content}</Card.Text>
-          <AspectRatioContainer ratio={16 / 9}>
           {tweet.image && (
             <Figure className="mt-3">
-              {tweet.image ? <Figure.Image
-                width={600}
-                height={300}
-                alt="Tweet Image"
-                src={tweet.image} // Actual tweet image
-              /> : null}
+              {tweet.image ?
+                <Figure.Image
+                  alt="Tweet Image"
+                  src={tweet.image} // Actual tweet image
+                  style={{ width: '100px' }}
+                /> : null}
             </Figure>
           )}
-          </AspectRatioContainer>
         </div>
       </Card.Body>
     </Card>

@@ -6,8 +6,6 @@ import RequestForm from "./TweetRequests";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../../styles/Login.css";
-import config from "../../constants/Config";
-import { storeDataWithTimestamp } from "../../utilities/LocalStorageUtils";
 import { retrieveDataWithTimestamp } from "../../utilities/LocalStorageUtils";
 import LOCAL_STORAGE_KEYS from "../../utilities/LocalStorageKeys";
 import ToastMessages from "../../constants/ToastMessages";
@@ -18,10 +16,6 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loginDetails, setLoginDetails] = useState({
-    email: "",
-    password: "",
-  });
 
   useEffect(() => {
     const retrievedData = retrieveDataWithTimestamp(
@@ -47,7 +41,7 @@ const LoginPage = () => {
       );
       const userToken = response.data.token;
       localStorage.setItem(LOCAL_STORAGE_KEYS.brix_common_v1_login, userToken);
-      history.push("/tweets");
+      history.push("/");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Axios error:", error);
