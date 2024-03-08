@@ -1,62 +1,70 @@
 // src/components/TweetRequests.js
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 // Import FontAwesome styles
-import '@fortawesome/fontawesome-free/css/all.css';
-import { useHistory } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import "@fortawesome/fontawesome-free/css/all.css";
+import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const TweetRequests = () => {
-  const data = [
-    { id: 1, name: 'John Doe', age: 25 },
-    { id: 2, name: 'Jane Doe', age: 30 },
-    { id: 3, name: 'Bob Smith', age: 28 },
-  ];
+  const [data, setData] = useState(null);
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/get-all-users`
+      );
+      const { data } = response.data;
+      const formattedUsers = data.map((user) => ({
+        id: user._id,
+        name: user.userName,
+        approvalStatus: user.isApproved,
+      }));
+      setData(formattedUsers);
+      console.log(data);
+    };
+    fetchUsers();
+  }, []);
   const history = useHistory();
 
   const showTweets = () => {
     // Change the route when the button is clicked
-    history.push('/tweets');
+    history.push("/tweets");
   };
 
   const postTweets = () => {
     // Change the route when the button is clicked
-    history.push('/addtweets');
-  }
-
-  const onAccept = () => {
-    //Perform this action on accepting the request
-  }
-
-  const onReject = () => {
-    ///Perform this action on rejecting the request
-  }
+    history.push("/addtweets");
+  };
 
   return (
     <>
-      <Button variant="primary" className="float-end m-3" onClick={showTweets}>Show Tweets</Button>
-      <Button variant="primary" className="float-end m-3" onClick={postTweets}>Add Tweets</Button>
+      <Button variant="primary" className="float-end m-3" onClick={showTweets}>
+        Show Tweets
+      </Button>
+      <Button variant="primary" className="float-end m-3" onClick={postTweets}>
+        Add Tweets
+      </Button>
       <div className="container mt-5">
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Age</th>
-              <th>Action</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.age}</td>
-                <td>
-                  <button type="button" className="btn btn-success m-2" onClick={onAccept}>Accept</button>
-                  <button type="button" className="btn btn-danger m-2" onClick={onReject}>Reject</button>
-                </td>
+            {data?.map((user, index) => (
+              <tr key={user.id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                {
+                  <td>
+                    {user.approvalStatus ? "Approved" : "Awaiting approval"}
+                  </td>
+                }
               </tr>
             ))}
           </tbody>
