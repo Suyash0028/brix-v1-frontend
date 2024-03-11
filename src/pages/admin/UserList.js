@@ -37,16 +37,10 @@ const UserList = () => {
     history.push("/admin/add-tweets");
   };
 
-  const userDetails = () => {
-    // Change the route when the button is clicked
-    history.push("/admin/user-details");
-  };
-
   return (
     <>
       <Button variant="primary" className="float-end m-3" onClick={showTweets}>Show Tweets</Button>
       <Button variant="primary" className="float-end m-3" onClick={postTweets}>Add Tweets</Button>
-      <Button variant="primary" className="float-end m-3" onClick={userDetails}>User Details</Button>
       <div className="container mt-5">
         <table className="table table-bordered table-hover">
           <thead>
@@ -60,7 +54,7 @@ const UserList = () => {
             {data?.map((user, index) => (
               <tr key={user.id}>
                 <td>{index + 1}</td>
-                <td>{user.name}</td>
+                <td><a href={`/admin/user-details?userId=${user.id}`}>{user.name}</a></td>
                 {
                   <td>
                     {user.approvalStatus ? "Approved" : "Awaiting approval"}

@@ -7,7 +7,7 @@ import "../../styles/Login.css";
 import LOCAL_STORAGE_KEYS from "../../utilities/LocalStorageKeys";
 
 const LoginPage = () => {
-  const history = useHistory();
+  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 

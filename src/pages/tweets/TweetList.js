@@ -30,7 +30,7 @@ const TweetList = () => {
   return (
     <Container className="mt-3">
       <Row>
-        <Col md={10}>
+        <Col md={20}>
           <h2>Your Tweets</h2>
           {tweets.map((tweet) => (
             <TweetComponent key={tweet.id} tweet={tweet} />

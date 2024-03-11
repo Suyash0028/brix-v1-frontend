@@ -25,7 +25,7 @@ const TweetComponent = ({ tweet }) => {
                 <Figure.Image
                   alt="Tweet Image"
                   src={tweet.image} // Actual tweet image
-                  style={{ width: '100px' }}
+                  style={{ width: '250px' }}
                 /> : null}
             </Figure>
           )}

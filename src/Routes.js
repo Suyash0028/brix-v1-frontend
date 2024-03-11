@@ -12,10 +12,12 @@ import AddTweets from "./pages/tweets/AddTweets";
 import ProtectedRoutes from "./privateRoutes";
 import UserDetails from "./pages/admin/UserDetails";
 import UserList from "./pages/admin/UserList";
+import BackButton from "./components/BackButton";
 
 const Routes = () => {
   return (
     <Router>
+      <BackButton />
       <Switch>
         <Route path={"/"} exact component={() => <Redirect to={"/admin"} />} />
         <Route
