@@ -1,32 +1,25 @@
-// src/pages/UserDetails/UserDetails.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap"; // Import Button from react-bootstrap
 import TweetComponent from "../../components/TweetComponent";
 import userImg from "../../assests/images/user.png";
 
 const UserDetails = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    // Function to parse query parameters from URL
     function getQueryVariable(variable) {
       const query = window.location.search;
       const queryParams = new URLSearchParams(query);
       return queryParams.get(variable);
     }
 
-    // Fetching the value of 'variableName' from the URL
     const userId = getQueryVariable('userId');
-    console.log('Value of variableName:', userId);
-
-    // Now you can use the userId as needed in your page
 
     const fetchUsersData = async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/users/${userId}/get-all-tweets`
       );
       const { data } = response.data;
-      console.log(data);
       const formattedTweets = data.map((post) => ({
         id: post._id,
         author: post.userName,
@@ -37,14 +30,26 @@ const UserDetails = () => {
       setData(formattedTweets);
     };
     fetchUsersData();
-  }, []); // Empty dependency array to ensure this effect runs only once
+  }, []);
+
+  const handleAccept = () => {
+    console.log("Accepted");
+  };
+
+  const handleReject = () => {
+    console.log("Rejected");
+  };
+
   return (
     <>
-      <h1>
-        User Details of {data[0]?.author}
-      </h1>
+      <h1>User Details of {data[0]?.author}</h1>
       <div>
-
+        <Button variant="success" onClick={handleAccept}>
+          Accept
+        </Button>{" "}
+        <Button variant="danger" onClick={handleReject}>
+          Reject
+        </Button>
       </div>
       <Container className="mt-3">
         <Row>
