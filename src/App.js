@@ -3,12 +3,10 @@ import "./App.css";
 import Routes from "./Routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UserNavbarComponent from "./components/NavbarComponent";
 
 function App() {
   return (
-    <div className="App">
-      <UserNavbarComponent />
+    <div>
       <Routes />
       <ToastContainer />
     </div>

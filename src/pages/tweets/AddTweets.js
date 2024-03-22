@@ -27,7 +27,7 @@ const AddTweets = () => {
             console.log(response);
             if (response.ok) {
                 //Redirect to tweets list
-                history.push("/tweets");
+                history.push("/application/tweets");
             }
             else {
                 toast.error(ToastMessages.Add_Tweet_Failed, {
@@ -144,7 +144,7 @@ const AddTweets = () => {
                             )}
                         </div>
                         <div className="d-flex gap-4 align-items-center justify-content-center">
-                            <button className="btn btn-light" onClick={() => history.push('/admin/user-list')}>
+                            <button className="btn btn-light" onClick={() => history.push('/application/admin/user-list')}>
                                 Cancel
                             </button>
                             <button type="submit" className="btn btn-primary">

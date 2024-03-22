@@ -4,7 +4,7 @@ import { Card, Figure } from 'react-bootstrap';
 
 const TweetComponent = ({ tweet }) => {
   return (
-    <Card className="col-md-8 offset-md-2 mb-3">
+    <Card className="col-md-12 my-3">
       <Card.Body className="d-flex">
         <Figure className="mr-3 mb-0"> {/* Added mb-0 for removing bottom margin */}
           <Figure.Image

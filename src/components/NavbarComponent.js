@@ -13,7 +13,7 @@ const UserNavbarComponent = () => {
 
     const handleLogout = () => {
         localStorage.removeItem(LOCAL_STORAGE_KEYS.brix_common_v1_login);
-        history.push("/admin/login");
+        history.push("/");
         toast.success(ToastMessages.Logout_Success, {
             position: "top-right",
             autoClose: 3000,
