@@ -5,6 +5,7 @@ import TweetComponent from "../../components/TweetComponent";
 import userImg from "../../assests/images/user.png";
 import { Link, useHistory } from "react-router-dom";
 import CustomSpinner from '../../components/Spinner'
+import RejectModalComponent from "../../components/RejectModalComponent";
 
 const UserDetails = () => {
   const [userData, setUserData] = useState();
@@ -13,7 +14,7 @@ const UserDetails = () => {
   const [fetchTweetsLoading, setFetchTweetsLoading] = useState(false);
   const [approveLoading, setApproveLoading] = useState(false);
   const [disapproveLoading, setDisapproveLoading] = useState(false);
-
+  const [openModal, isOpen] = useState(false);
   const history = useHistory();
 
   function getQueryVariable(variable) {
@@ -85,9 +86,49 @@ const UserDetails = () => {
   };
 
   const handleReject = () => {
-    console.log("Rejected");
+    isOpen(true);
+    console.log("Clicked");
+    // try {
+    //   const response = await axios.post(
+    //     `${process.env.REACT_APP_BASE_URL}/admin/update-user`,
+    //     {
+    //       userId,
+    //       isApproved: false,
+    //       rejectReason: ""
+    //     }
+    //   );
+    //   if (response.status === 200) {
+    //     history.push("/application/tweets");
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // } finally {
+    //   setApproveLoading(false);
+    // }
+
+
   };
 
+  const handleSave = async (rejectReasonValue) => {
+    setApproveLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/admin/update-user`,
+        {
+          userId,
+          isApproved: false,
+          rejectReason: rejectReasonValue
+        }
+      );
+      if (response.status === 200) {
+        history.push("/application/tweets");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setApproveLoading(false);
+    }
+  }
   // const SPINNER = (
   //   <div className="p-5 d-flex align-items-center justify-content-center">
   //     <Spinner animation="border" role="status">
@@ -137,6 +178,9 @@ const UserDetails = () => {
           </Row>
         )}
       </Container>
+      {openModal == true ?
+        <RejectModalComponent isOpen={openModal} handleSave={handleSave} />
+        : null}
     </div>
   );
 };
